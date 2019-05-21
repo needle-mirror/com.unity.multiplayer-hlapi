@@ -13,12 +13,11 @@ If you want to contribute patches back, please keep it under the unmodified MIT 
 
 ### How do I get started? ###
 * Go to the Package Manager UI in the Unity editor (found under the Window menu).
-* Make sure "Show preview packages" is enabled in the Advanced menu in the package manager UI.
 * The HLAPI package should appear in the list of packages, select it and click the Install button
 
 or
 
-* Add the package to your project manifest.json file, located in the Packages folder. Under dependencies add the line _"com.unity.multiplayer-hlapi": "0.2.6-preview"_ to the list of packages. A specific version needs to be chosen.
+* Add the package to your project manifest.json file, located in the Packages folder. Under dependencies add the line _"com.unity.multiplayer-hlapi": "1.0.4"_ to the list of packages. A specific version needs to be chosen.
 
 or
 
@@ -33,7 +32,7 @@ When including the package via the manifest.json file the `testable` field needs
 ```
 {
   "dependencies": {
-    "com.unity.multiplayer-hlapi": "0.2.6-preview",
+    "com.unity.multiplayer-hlapi": "1.0.4",
     ... more stuff...
   },
   "testables": [

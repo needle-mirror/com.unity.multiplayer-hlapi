@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.4] - 2019-05-22
+
+### Changed
+- Removed prefab resources from Runtime tests and made them generate through code (fixes warnings in Resource.LoadAll)
+- Fix for too long test names which affected some build flows
+
+## [1.0.3] - 2019-05-21
+
+### Changed
+- Fixes in test setup phase to make execution faster
+- Fixed typo for NetworkTransformChild.
+
 ## [1.0.2] - 2019-03-18
 
 ### Changed

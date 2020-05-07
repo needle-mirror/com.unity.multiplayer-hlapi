@@ -11,6 +11,7 @@ public class SpawnObjectBeforeConnect : SpawningTestBase
 {
     bool isDone;
 
+    [Ignore("Disabled until weaver invocation when run in CI is sorted")]
     [UnityTest]
     public IEnumerator SpawnObjectBeforeConnectTest()
     {

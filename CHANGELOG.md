@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.6] - 2020-05-08
+
+### Changed
+- Fixes for automation/CI execution
+- Fix weaver sometimes complaining about invalid path or locked file
+- Fix weaver assembly version (required for deterministic builds)
+- Fix for issue where you could read out of bounds in NetworkConnection message handling
+
 ## [1.0.4] - 2019-05-22
 
 ### Changed

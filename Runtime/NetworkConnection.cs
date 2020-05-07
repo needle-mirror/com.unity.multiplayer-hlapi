@@ -692,6 +692,17 @@ namespace UnityEngine.Networking
                 ushort sz = reader.ReadUInt16();
                 short msgType = reader.ReadInt16();
 
+                // Bail out here if we're about to read beyond the recieved size of the buffer
+                // This could be a sign of an attack which could cause us to behave unexpectedly by reading old data
+                if (reader.Position + sz > receivedSize )
+                {
+                    if (LogFilter.logError)
+                    {
+                        Debug.LogError("Declared packet size larger than recieved size, possible corruption or attack");
+                    }
+                    break;
+                }
+
                 // create a reader just for this message
                 //TODO: Allocation!!
                 byte[] msgBuffer = reader.ReadBytes(sz);

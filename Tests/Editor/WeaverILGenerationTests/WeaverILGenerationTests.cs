@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [TestFixture]
+[Ignore("Disabled until weaver invocation when run in CI is sorted")]
 public class WeaverILGenerationTests
 {
     [Test]

@@ -17,6 +17,7 @@ public class NetworkManagerHandlesLargePacket
     }
 
     [UnityTest]
+    [Ignore("Disabled until weaver invocation when run in CI is sorted")]
     public IEnumerator NetworkManagerHandlesLargePacketTest()
     {
         NetworkClient.ShutdownAll();

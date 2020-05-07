@@ -49,6 +49,7 @@ public class NetworkBehaviourCallbacksOrderOnTheHost : IPrebuildSetup, IPostBuil
 
     //[KnownFailure(855941, "OnSetLocalVisibility callback should appear only once ")]
     [UnityTest]
+    [Ignore("Disabled until weaver invocation when run in CI is sorted")]
     public IEnumerator CallbacksOrderInNetworkBehaviourOnTheHostIsCorrect()
     {
         NetworkClient.ShutdownAll();

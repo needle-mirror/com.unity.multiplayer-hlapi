@@ -13,8 +13,8 @@ public class ConnectWithDNSWorks
     [UnityTest]
     public IEnumerator ConnectWithDNSWorksTest()
     {
-        NetworkServer.Reset();
         NetworkClient.ShutdownAll();
+        NetworkServer.Reset();
 
         ConnectionConfig config = new ConnectionConfig();
         config.AddChannel(QosType.ReliableSequenced);

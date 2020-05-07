@@ -22,6 +22,7 @@ public class HavingManyLocalClientsSimultaneouslyWorks
     int msgCountClientRecieved = 0;
 
     [UnityTest]
+    [Ignore("Disabled until weaver invocation when run in CI is sorted")]
     public IEnumerator HavingManyLocalClientsSimultaneouslyWorksTest()
     {
         NetworkClient.ShutdownAll();

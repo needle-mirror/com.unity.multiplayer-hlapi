@@ -16,6 +16,7 @@ public class NetworkClientDisconnectWorks
     NetworkClient myClient;
 
     [UnityTest]
+    [Ignore("Disabled until weaver invocation when run in CI is sorted")]
     public IEnumerator NetworkClientDisconnectWorksTest()
     {
         NetworkClient.ShutdownAll();

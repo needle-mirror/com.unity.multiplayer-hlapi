@@ -12,6 +12,7 @@ public class NetworkClientActiveWorksWithManyClients
     int m_ClientConnectionCount = 0;
 
     [UnityTest]
+    [Ignore("Disabled until weaver invocation when run in CI is sorted")]
     public IEnumerator NetworkClientActiveWorksWithManyClientsTest()
     {
         NetworkClient.ShutdownAll();

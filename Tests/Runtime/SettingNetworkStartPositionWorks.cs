@@ -55,8 +55,8 @@ public class SettingNetworkStartPositionWorks : IPrebuildSetup, IPostBuildCleanu
     [UnityTest]
     public IEnumerator SettingNetworkStartPositionWorksTest()
     {
-        NetworkServer.Reset();
         NetworkClient.ShutdownAll();
+        NetworkServer.Reset();
         yield return null;
         var testNetworkManagerStartPos = NetworkManager.singleton.gameObject.GetComponent<TestNetworkManagerStartPos>();
         testNetworkManagerStartPos.StartServer();

@@ -14,6 +14,7 @@ public class LocalClientSpawnsMultiplePlayers : SpawningTestBase, IPrebuildSetup
     GameObject m_Obj;
 
     [UnityTest]
+    [Ignore("Disabled until weaver invocation when run in CI is sorted")]
     public IEnumerator LocalClientSpawnsMultiplePlayersTest()
     {
         NetworkClient.ShutdownAll();

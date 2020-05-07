@@ -19,8 +19,8 @@ public class ChannelBufferHandlesOverflow
     [UnityTest]
     public IEnumerator ChannelBufferHandlesOverflowTest()
     {
-        NetworkServer.Reset();
         NetworkClient.ShutdownAll();
+        NetworkServer.Reset();
 
         ConnectionConfig config = new ConnectionConfig();
         config.AddChannel(QosType.ReliableSequenced);

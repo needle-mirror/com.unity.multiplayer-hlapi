@@ -51,8 +51,8 @@ public class NetworkManagerCallbacksOrderOnTheHost : IPrebuildSetup, IPostBuildC
     [UnityTest]
     public IEnumerator CallbacksOrderInNetworkManagerOnTheHostIsCorrect()
     {
-        NetworkServer.Reset();
         NetworkClient.ShutdownAll();
+        NetworkServer.Reset();
 
         var customeNetworkManagerWithCallbacks =
             NetworkManager.singleton.gameObject.GetComponent<CustomNetworkManagerWithCallbacks>();

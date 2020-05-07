@@ -5,15 +5,17 @@
         "com.unity.multiplayer-hlapi.Runtime",
         "com.unity.multiplayer-hlapi.Tests"
     ],
-    "optionalUnityReferences": [
-        "TestAssemblies"
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Mono.Cecil.dll"
+    ],
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
     ],
     "includePlatforms": [
         "Editor"
     ],
-    "excludePlatforms": [],
-    "overrideReferences": true,
-    "precompiledReferences": [
-        "Mono.Cecil.dll"
+    "optionalUnityReferences": [
+        "TestAssemblies"
     ]
 }

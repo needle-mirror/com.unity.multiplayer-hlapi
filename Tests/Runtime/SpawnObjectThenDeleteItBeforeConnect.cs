@@ -11,6 +11,7 @@ public class SpawnObjectThenDeleteItBeforeConnect : SpawningTestBase
 {
     bool isDone = false;
 
+    [Ignore("Disabled until weaver invocation when run in CI is sorted")]
     [UnityTest]
     public IEnumerator SpawnObjectThenDeleteItBeforeConnectTest()
     {

@@ -60,8 +60,8 @@ public class AuthorityOnSpawnedObjectsIsCorrect : IPrebuildSetup, IPostBuildClea
     [UnityTest]
     public IEnumerator AuthorityOnSpawnedObjectsIsCorrectTest()
     {
-        NetworkServer.Reset();
         NetworkClient.ShutdownAll();
+        NetworkServer.Reset();
 
         Assert.IsNotNull(NetworkManager.singleton.playerPrefab, "Player prefab field is not set on NetworkManager");
         NetworkManager.singleton.StartHost();

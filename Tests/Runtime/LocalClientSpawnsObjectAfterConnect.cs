@@ -13,6 +13,7 @@ public class LocalClientSpawnsObjectAfterConnect : SpawningTestBase
     GameObject obj;
 
     [UnityTest]
+    [Ignore("Disabled until weaver invocation when run in CI is sorted")]
     public IEnumerator LocalClientSpawnsObjectAfterConnectTest()
     {
         NetworkClient.ShutdownAll();

@@ -16,7 +16,7 @@ namespace UnityEditor.Networking
             CompilationPipeline.assemblyCompilationFinished += OnCompilationFinished;
         }
 
-        static void OnCompilationFinished(string targetAssembly, CompilerMessage[] messages)
+        internal static void OnCompilationFinished(string targetAssembly, CompilerMessage[] messages)
         {
             const string k_HlapiRuntimeAssemblyName = "com.unity.multiplayer-hlapi.Runtime";
 
@@ -38,12 +38,12 @@ namespace UnityEditor.Networking
                 return;
             }
 
-            // Should not run on own assembly
-            if (targetAssembly.Contains(k_HlapiRuntimeAssemblyName))
+            // Should not run on own assembly or Unity assemblies
+            if (targetAssembly.Contains("com.unity") || Path.GetFileName(targetAssembly).StartsWith("Unity"))
             {
                 return;
             }
-
+            
             var scriptAssembliesPath = Application.dataPath + "/../" + Path.GetDirectoryName(targetAssembly);
 
             string unityEngine = "";
@@ -102,7 +102,11 @@ namespace UnityEditor.Networking
                     try
                     {
                         if (!(assembly.ManifestModule is System.Reflection.Emit.ModuleBuilder))
-                            depenencyPaths.Add(Path.GetDirectoryName(Assembly.Load(assembly.GetName().Name).Location));
+                        {
+                            var location = Assembly.Load(assembly.GetName().Name).Location;
+                            if (!string.IsNullOrEmpty(location))
+                                depenencyPaths.Add(Path.GetDirectoryName(location));
+                        }
                     }
                     catch (FileNotFoundException) { }
                 }
@@ -125,7 +129,7 @@ namespace UnityEditor.Networking
                 Debug.LogError("Failed to find hlapi runtime assembly");
                 return;
             }
-
+            
             Unity.UNetWeaver.Program.Process(unityEngine, unetAssemblyPath, outputDirectory, new[] { assemblyPath }, depenencyPaths.ToArray(), (value) => { Debug.LogWarning(value); }, (value) => { Debug.LogError(value); });
         }
     }

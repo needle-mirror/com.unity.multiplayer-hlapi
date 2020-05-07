@@ -13,6 +13,7 @@ public class IsConnectedPropertyWorksOnDifferentClients
     bool isTestDone;
 
     [UnityTest]
+    [Ignore("Disabled until weaver invocation when run in CI is sorted")]
     public IEnumerator IsConnectedPropertyWorksOnDifferentClientsTest()
     {
         NetworkClient.ShutdownAll();

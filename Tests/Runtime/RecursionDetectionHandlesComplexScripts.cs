@@ -10,8 +10,8 @@ public class RecursionDetectionHandlesComplexScripts
     [UnityTest]
     public IEnumerator RecursionDetectionHandlesComplexScriptsTest()
     {
-        NetworkServer.Reset();
         NetworkClient.ShutdownAll();
+        NetworkServer.Reset();
 
         GameObject go = new GameObject();
         go.name = "objectWithComplexScript";

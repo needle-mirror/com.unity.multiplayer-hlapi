@@ -12,6 +12,7 @@ public class SpawnObjectAfterConnect : SpawningTestBase
     bool isDone;
     GameObject obj;
 
+    [Ignore("Disabled until weaver invocation when run in CI is sorted")]
     [UnityTest]
     public IEnumerator SpawnObjectAfterConnectTest()
     {

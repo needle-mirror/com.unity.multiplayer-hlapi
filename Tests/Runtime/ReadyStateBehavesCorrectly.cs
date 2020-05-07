@@ -20,8 +20,8 @@ public class ReadyStateBehavesCorrectly
     [UnityTest]
     public IEnumerator ReadyStateBehavesCorrectlyTest()
     {
-        NetworkServer.Reset();
         NetworkClient.ShutdownAll();
+        NetworkServer.Reset();
 
         NetworkServer.RegisterHandler(MsgType.Ready, OnServerReady);
 

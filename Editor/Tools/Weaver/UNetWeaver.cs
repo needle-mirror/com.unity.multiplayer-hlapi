@@ -1145,8 +1145,13 @@ namespace Unity.UNetWeaver
             return true;
         }
 
-        public MethodReference ResolveMethod(TypeReference t, string name)
+        public MethodReference ResolveMethod(TypeReference t, string name, Func<MethodDefinition, bool> methodSelectionCondition = null)
         {
+            Func<MethodDefinition, bool> condition =
+                methodSelectionCondition != null
+                    ? new Func<MethodDefinition, bool>(m => m.Name == name && methodSelectionCondition(m))
+                    : m => m.Name == name;
+            
             //Console.WriteLine("ResolveMethod " + t.ToString () + " " + name);
             if (t == null)
             {
@@ -1154,13 +1159,13 @@ namespace Unity.UNetWeaver
                 fail = true;
                 return null;
             }
-            foreach (var methodRef in t.Resolve().Methods)
+
+            MethodDefinition methodDefinition = t.Resolve().Methods.FirstOrDefault(condition);
+            if (methodDefinition != null)
             {
-                if (methodRef.Name == name)
-                {
-                    return m_ScriptDef.MainModule.ImportReference(methodRef);
-                }
+                return m_ScriptDef.MainModule.ImportReference(methodDefinition);
             }
+
             Log.Error("ResolveMethod failed " + t.Name + "::" + name + " " + t.Resolve());
 
             // why did it fail!?
@@ -1449,8 +1454,8 @@ namespace Unity.UNetWeaver
             registerSyncListDelegateReference = ResolveMethod(NetworkBehaviourType, "RegisterSyncListDelegate");
             getTypeReference = ResolveMethod(objectType, "GetType");
             getTypeFromHandleReference = ResolveMethod(typeType, "GetTypeFromHandle");
-            logErrorReference = ResolveMethod(m_UnityAssemblyDefinition.MainModule.GetType("UnityEngine.Debug"), "LogError");
-            logWarningReference = ResolveMethod(m_UnityAssemblyDefinition.MainModule.GetType("UnityEngine.Debug"), "LogWarning");
+            logErrorReference = ResolveMethod(m_UnityAssemblyDefinition.MainModule.GetType("UnityEngine.Debug"), "LogError", m => m.Parameters.Count == 1);
+            logWarningReference = ResolveMethod(m_UnityAssemblyDefinition.MainModule.GetType("UnityEngine.Debug"), "LogWarning", m => m.Parameters.Count == 1);
             sendCommandInternal = ResolveMethod(NetworkBehaviourType, "SendCommandInternal");
             sendRpcInternal = ResolveMethod(NetworkBehaviourType, "SendRPCInternal");
             sendTargetRpcInternal = ResolveMethod(NetworkBehaviourType, "SendTargetRPCInternal");

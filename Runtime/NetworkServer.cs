@@ -1160,7 +1160,26 @@ namespace UnityEngine.Networking
 
                 // pass a reader (attached to local buffer) to handler
                 NetworkReader reader = new NetworkReader(writer);
-                conn.InvokeHandler(MsgType.Error, reader, 0);
+                if (conn == null)
+                {
+                    NetworkMessage networkMsg = new NetworkMessage();
+                    networkMsg.msgType = MsgType.Error;
+                    networkMsg.conn = null;
+                    networkMsg.reader = reader;
+                    networkMsg.channelId = 0;
+
+                    NetworkMessageDelegate msgDelegate = handlers[MsgType.Error];
+                    if (msgDelegate == null)
+                    {
+                        if (LogFilter.logError) { Debug.LogError("GenerateError no handler for " + MsgType.Error); }
+                        return;
+                    }
+                    msgDelegate(networkMsg);
+                }
+                else 
+                {
+                    conn.InvokeHandler(MsgType.Error, reader, 0);
+                }
             }
         }
 
@@ -2567,6 +2586,11 @@ namespace UnityEngine.Networking
             public override void OnDisconnectError(NetworkConnection conn, byte error)
             {
                 m_Server.GenerateDisconnectError(conn, error);
+            }
+
+            public override void OnError(int connectionId, byte error)
+            {
+                m_Server.GenerateError(null, error);
             }
 
             public override void OnConnected(NetworkConnection conn)

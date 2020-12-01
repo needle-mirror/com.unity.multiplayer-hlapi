@@ -358,7 +358,13 @@ namespace UnityEngine.Networking
                     }
 
                     case NetworkEventType.Nothing:
+                    {
+                        if (error != 0)
+                        {
+                            OnError(connectionId, error);
+                        }
                         break;
+                    }
 
                     default:
                         if (LogFilter.logError) { Debug.LogError("Unknown network message type received: " + networkEvent); }
@@ -598,6 +604,16 @@ namespace UnityEngine.Networking
         public virtual void OnDisconnectError(NetworkConnection conn, byte error)
         {
             Debug.LogError("OnDisconnectError error:" + error);
+        }
+
+        /// <summary>
+        /// A virtual function that is called when an error happens outside of connection, data or disconnect.
+        /// </summary>
+        /// <param name="conn">The connection id that the error occured on.</param>
+        /// <param name="error">The error code.</param>
+        public virtual void OnError(int connectionId, byte error)
+        {
+            Debug.LogError("OnError error:" + error);
         }
 
         /// <summary>

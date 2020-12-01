@@ -1011,6 +1011,10 @@ namespace UnityEngine.Networking
                         break;
 
                     case NetworkEventType.Nothing:
+                        if (error != 0)
+                        {
+                            GenerateError(error);
+                        }
                         break;
 
                     default:

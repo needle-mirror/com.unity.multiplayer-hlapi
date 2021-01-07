@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.1] - 2021-01-07
+- Fixed issue where UNetWeaver would generate duplicate write functions for the same time which would cause IL2CPP to fail (case 1328966)
+
+## [1.1.0] - 2021-01-07
+- Updated min Unity version to 2019.4
+
+## [1.0.9] - 2021-01-05
+- Updated com.unity.nuget.mono-cecil to non-preview package
+
 ## [1.0.8] - 2020-12-01
 - Fixed issue with CI Validation
 - Add virtual to handle errors that occur outside of connection, data or disconnection events.

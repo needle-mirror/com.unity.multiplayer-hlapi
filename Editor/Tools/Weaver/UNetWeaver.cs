@@ -300,7 +300,13 @@ namespace Unity.UNetWeaver
             if (lists.writeFuncs.ContainsKey(variable.FullName))
             {
                 var foundFunc = lists.writeFuncs[variable.FullName];
-                if (foundFunc.Parameters[0].ParameterType.IsArray == variable.IsArray)
+
+                // In write functions the variable is always going to be the last param
+                // in the case of places where you have a NetworkWriter involved we should
+                // be checking the second param not the first;
+                var paramIndex = foundFunc.Parameters.Count - 1;
+
+                if (paramIndex >= 0 && foundFunc.Parameters[paramIndex].ParameterType.IsArray == variable.IsArray)
                 {
                     return foundFunc;
                 }
